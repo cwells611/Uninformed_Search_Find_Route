@@ -21,9 +21,13 @@ for line in input_lines:
         individual_line.append(element)
     input_array.append(individual_line)
 
-
-#loop through the input file and add nodes, edges, 
+#loop through the list of lists and add nodes, edges, 
 #and weights to city graph 
+for i in range(len(input_array)):
+    cities.add_node(input_array[i][0])
+    cities.add_node(input_array[i][1])
+    cities.add_edge(input_array[i][0], input_array[i][1], weight=input_array[i][2])
+
 
 
 #close file
