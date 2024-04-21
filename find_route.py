@@ -34,8 +34,23 @@ def create_graph(input_file):
 #open file specified from command line 
 input_file = open(sys.argv[1], "r")
 
+#get start and terminal city from command line
+start_city = sys.argv[2]
+terminal_city = sys.argv[3]
+
 #create the graph with input 
 cities = create_graph(input_file)
+
+#check to see if two cities are the same, if so, output and exit
+if(start_city == terminal_city):
+    print("distance: 0km")
+    print("route: ")
+    print(start_city + " to " + terminal_city + ", 0km")
+    sys.exit(0)
+#check to see if either of the cities used in command line are not in input map
+if(not cities.has_node(start_city) or not cities.has_node(terminal_city)):
+    print("One or both input cities not in input map.")
+    sys.exit(1)
 
 #close file
 input_file.close()
