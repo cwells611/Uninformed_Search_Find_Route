@@ -79,17 +79,21 @@ def find_shortest_path(start, end, map: nx.Graph):
         #check to see if the node we are going to expand is the goal node 
         if(is_goal_node(end, expanded_node[1])):
             print("breaking")
-            print(expanded_node[0])
+            #print distance of path
+            print("distance: " + str(expanded_node[0]) + " km")
             break
-    #once out of the for loop we need to reconstruct the path 
-    #print(map.nodes[end])
-    city = end 
-    path = [city]
-    while (not city == start):
-        city = map.nodes[city]['parent']
-        path.append(city)
-    print(path)
-    print("we are out, we found the path")
+    #once out of the for loop we need to reconstruct the path working up through parent nodes
+    path = [end]
+    while (not end == start):
+        end = map.nodes[end]['parent']
+        path.append(end)
+    #reverse the path to go from start to end
+    path.reverse()
+    #output route taken
+    print("route:")
+    for i in range(len(path) - 1):
+        print(path[i] + " to " + path[i+1] + ", " + map.edges[path[i], path[i+1]]['weight'] + " km")
+    
     
         
 
@@ -100,7 +104,7 @@ input_file = open("Uninformed_Search_Find_Route\input1.txt", "r")
 
 #get start and terminal city from command line
 start_city = "Bremen"
-terminal_city = "Frankfurt"
+terminal_city = "Dresden"
 
 #create the graph with input 
 cities = create_graph(input_file)
