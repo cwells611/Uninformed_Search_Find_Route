@@ -25,7 +25,7 @@ def create_graph(input_file):
     for i in range(len(input_array)):
         cities.add_node(input_array[i][0], parent='')
         cities.add_node(input_array[i][1], parent='')
-        cities.add_edge(input_array[i][0], input_array[i][1], weight=input_array[i][2])
+        cities.add_edge(input_array[i][0], input_array[i][1], weight=int(input_array[i][2]))
    
     #return the created graph 
     return cities
@@ -57,7 +57,6 @@ def find_shortest_path(start, end, map: nx.Graph):
     #intially populate the fringe with first level of neighbors 
     next_level = get_neighbors(start, map)
     for i in range(len(next_level)):
-        print("putting into fringe " + str(next_level[i][0]))
         #set the parent of the node to the root node initially 
         map.nodes[next_level[i][0]]['parent'] = start
         #put each neighbor into the priority queue based on length 
@@ -70,7 +69,6 @@ def find_shortest_path(start, end, map: nx.Graph):
         next_level = get_neighbors(expanded_city, map)
         #add nodes to fringe, but with total path weight 
         for i in range(len(next_level)):
-            print("putting into fringe " + str(next_level[i][0]))
             #set the parent of each node we are putting into the fringe as the node being expanded 
             if map.nodes[next_level[i][0]]['parent'] == '':
                 map.nodes[next_level[i][0]]['parent'] = expanded_city
@@ -78,10 +76,12 @@ def find_shortest_path(start, end, map: nx.Graph):
             fringe.put((next_level[i][1] + expanded_node[0], next_level[i][0]))
         #check to see if the node we are going to expand is the goal node 
         if(is_goal_node(end, expanded_node[1])):
-            print("breaking")
             #print distance of path
             print("distance: " + str(expanded_node[0]) + " km")
             break
+    print(nx.shortest_path(map, source=start, target=end, weight='weight'))
+    print(nx.shortest_path_length(map, source=start, target=end, weight='weight'))
+
     #once out of the for loop we need to reconstruct the path working up through parent nodes
     path = [end]
     while (not end == start):
@@ -92,19 +92,18 @@ def find_shortest_path(start, end, map: nx.Graph):
     #output route taken
     print("route:")
     for i in range(len(path) - 1):
-        print(path[i] + " to " + path[i+1] + ", " + map.edges[path[i], path[i+1]]['weight'] + " km")
-    
+        print(path[i] + " to " + path[i+1] + ", " + str(map.edges[path[i], path[i+1]]['weight']) + " km")    
     
         
 
 
 #main()
 #open file specified from command line 
-input_file = open("Uninformed_Search_Find_Route\input1.txt", "r")
+input_file = open(sys.argv[1], "r")
 
 #get start and terminal city from command line
-start_city = "Bremen"
-terminal_city = "Dresden"
+start_city = sys.argv[2]
+terminal_city = sys.argv[3]
 
 #create the graph with input 
 cities = create_graph(input_file)
