@@ -52,49 +52,40 @@ def get_neighbors(root, graph: nx.Graph):
 def find_shortest_path(start, end, map: nx.Graph):
     #queue to hold the fringe nodes while searching
     fringe = queue.PriorityQueue()
-    #list to hold path algorithm takes 
-    path = []
-    #initially expand the start node
-    expanded_city = start
+    #intially populate the fringe with first level of neighbors 
+    next_level = get_neighbors(start, map)
+    for i in range(len(next_level)):
+        print("putting into fringe " + str(next_level[i][0]))
+        #put each neighbor into the priority queue based on length 
+        fringe.put((next_level[i][1], next_level[i][0]))
     while(True):
-        #get neighbors of start node 
-        next_level = get_neighbors(expanded_city, map)
-        #loop through neighbors, adding each to the fringe 
-        for i in range(len(next_level)):
-            print("putting into fringe " + str(next_level[i][0]))
-            #put each neighbor into the priority queue based on length 
-            fringe.put((next_level[i][1], next_level[i][0]))
-        #select the first node in the fringe for expansion
+        #pull top node out of fringe for expansion 
         expanded_node = fringe.get()
         expanded_city = expanded_node[1]
-        #add expanded node to the path 
-        path.append(expanded_node)
+        #after top node has been selected, get its neighbors 
+        next_level = get_neighbors(expanded_city, map)
+        #add nodes to fringe, but with total path weight 
+        for i in range(len(next_level)):
+            print("putting into fringe " + str(next_level[i][0]))
+            #put into fringe, but instead of just path weight, its path weight + weight of expanded node 
+            fringe.put((next_level[i][1] + expanded_node[0], next_level[i][0]))
         #check to see if the node we are going to expand is the goal node 
         if(is_goal_node(end, expanded_node[1])):
             print("breaking")
+            print(expanded_node[0])
             break
+    print("we are out, we found the path")
     
-    #once we have broken out of the while loop, path will contain optimal path
-    #loop through and add weights to get the min distance 
-    length = 0
-    for i in range(len(path)):
-        length += path[i][1]
-    
-    #format output 
-    print("distance: " + length)
-    print("route:")
-    for i in range(len(path) + 1):
-        print(path[i][1] + " to " + path[i+1][1] + ", " + path[i][0] + " km")
         
 
 
 #main()
 #open file specified from command line 
-input_file = open(sys.argv[1], "r")
+input_file = open("Uninformed_Search_Find_Route\input1.txt", "r")
 
 #get start and terminal city from command line
-start_city = sys.argv[2]
-terminal_city = sys.argv[3]
+start_city = "Bremen"
+terminal_city = "Frankfurt"
 
 #create the graph with input 
 cities = create_graph(input_file)
