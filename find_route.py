@@ -98,6 +98,11 @@ def find_shortest_path(start, end, map: nx.Graph):
 
 
 #main()
+#check to see if the right number of arguments is presented 
+if(not len(sys.argv) == 3):
+    print("Please provide 3 arguments: input file, start city, end city")
+    sys.exit(1)
+    
 #open file specified from command line 
 input_file = open(sys.argv[1], "r")
 
