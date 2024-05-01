@@ -23,8 +23,11 @@ def create_graph(input_file):
     #loop through the list of lists and add nodes, edges, 
     #and weights to city graph 
     for i in range(len(input_array)):
-        cities.add_node(input_array[i][0], parent='')
-        cities.add_node(input_array[i][1], parent='')
+        #if neither of the cities are already in the graph, add them 
+        if(not cities.has_node(input_array[i][0])):
+            cities.add_node(input_array[i][0], parent='')
+        if(not cities.has_node(input_array[i][1])):
+            cities.add_node(input_array[i][1], parent='')
         cities.add_edge(input_array[i][0], input_array[i][1], weight=int(input_array[i][2]))
    
     #return the created graph 
@@ -79,6 +82,8 @@ def find_shortest_path(start, end, map: nx.Graph):
             #print distance of path
             print("distance: " + str(expanded_node[0]) + " km")
             break
+    print(nx.shortest_path(map, start, end, weight='weight'))
+    
 
     #once out of the for loop we need to reconstruct the path working up through parent nodes
     path = [end]
