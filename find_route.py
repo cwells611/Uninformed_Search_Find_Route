@@ -53,7 +53,7 @@ def find_shortest_path(start, end, map: nx.Graph):
     #at the start of the search, set start city's parent to itself 
     map.nodes[start]['parent'] = start
     #queue to hold the fringe nodes while searching
-    fringe = queue.PriorityQueue()
+    fringe = queue.PriorityQueue()     
     #intially populate the fringe with first level of neighbors 
     next_level = get_neighbors(start, map)
     for i in range(len(next_level)):
@@ -79,8 +79,6 @@ def find_shortest_path(start, end, map: nx.Graph):
             #print distance of path
             print("distance: " + str(expanded_node[0]) + " km")
             break
-    print(nx.shortest_path(map, source=start, target=end, weight='weight'))
-    print(nx.shortest_path_length(map, source=start, target=end, weight='weight'))
 
     #once out of the for loop we need to reconstruct the path working up through parent nodes
     path = [end]
@@ -99,10 +97,10 @@ def find_shortest_path(start, end, map: nx.Graph):
 
 #main()
 #check to see if the right number of arguments is presented 
-if(not len(sys.argv) == 3):
+if(not len(sys.argv) == 4):
     print("Please provide 3 arguments: input file, start city, end city")
     sys.exit(1)
-    
+
 #open file specified from command line 
 input_file = open(sys.argv[1], "r")
 
