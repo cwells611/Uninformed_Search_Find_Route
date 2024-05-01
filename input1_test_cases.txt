@@ -1,0 +1,43 @@
+Test Case 1: Munich -> Luebeck 
+Input: python .\find_route.py .\intput1.txt Munich Luebeck 
+Expected Output:
+distance: 923 km
+route:
+Munich to Nuremberg, 171 km
+Nuremberg to Leipzig, 263 km
+Leipzig to Magdeburg, 125 km
+Magdeburg to Hannover, 148 km
+Hannover to Hamburg, 153 km
+Hamburg to Luebeck, 63 km
+
+Test Case 2: Kassel -> London
+Input: python .\find_route.py .\intput1.txt Kassel London
+Expected Output:
+distance: infinity
+route: 
+none
+
+Test Case 3: Kassel -> Karlsruhe
+Input: python .\find_route.py .\intput1.txt Kassel Karlsruhe
+Expected Output: 
+distance: 475 km
+route:
+Kassel to Frankfurt, 185 km
+Frankfurt to Dortmund, 221 km
+Dortmund to Duesseldorf, 69 km
+
+Test Case 4: Stuttgart -> Stuttgart
+Input: python .\find_route.py .\intput1.txt Stuttgart Stuttgart
+Expected Output:
+distance: 0km
+route:
+Stuttgart to Stuttgart, 0km
+
+Test Case 5: Dresden -> Frankfurt
+Input: python .\find_route.py .\intput1.txt Dresden Frankfurt
+Expected Output:
+distance: 604 km 
+route:
+Dresden to Leipzig, 119 km
+Leipzig to Nuremberg, 263 km
+Nuremberg to Frankfurt, 222 km
