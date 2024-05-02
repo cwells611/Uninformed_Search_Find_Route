@@ -1,0 +1,38 @@
+Test Case 1: Oklahoma_City -> Durant 
+Input: python .\find_route .\newinput.txt Lawton Eufaula
+Expected Output:
+distance: 270 km
+route:
+Lawton to Oklahoma_City, 120 km
+Oklahoma_City to Eufaula, 150 km
+
+Test Case 2: Guymon -> Idabel
+Input: python .\find_route.py .\newinput.txt Guymon Idabel
+Expected Output:
+distance: 478 km
+Guymon to Oklahoma_City, 250 km
+Oklahoma_City to Eufaula, 150 km
+Eufaula to Idabel, 78 km
+
+Test Case 3: Ardmore -> Tulsa
+Input: python .\find_route.py .\newinput.txt Ardmore Tulsa
+Expected Output: 
+distance: 158 km
+route:
+Ardmore to Norman, 50 km
+Norman to Oklahoma_City, 45 km
+Oklahoma_City to Tulsa, 90 km
+
+Test Case 4: Elk_City -> Durant
+Input: python .\find_route.py .\newinput.txt Elk_City Durant
+Expected Output: 
+distance: 310 km
+route:
+Elk_City to Lawton, 100 km
+Lawton to Ardmore, 120 km
+Ardmore to Durant, 90 km
+
+Test Case 5: Kingfisher -> Oklahoma_City
+Input: python .\find_route.py .\newinput.txt Kingfisher Oklahoma_City
+Expected Output:
+One or both input cities not in input map. 
