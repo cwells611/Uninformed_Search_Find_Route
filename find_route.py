@@ -81,9 +81,7 @@ def find_shortest_path(start, end, map: nx.Graph):
         if(is_goal_node(end, expanded_node[1])):
             #print distance of path
             print("distance: " + str(expanded_node[0]) + " km")
-            break
-    print(nx.shortest_path(map, start, end, weight='weight'))
-    
+            break    
 
     #once out of the for loop we need to reconstruct the path working up through parent nodes
     path = [end]
@@ -96,9 +94,6 @@ def find_shortest_path(start, end, map: nx.Graph):
     print("route:")
     for i in range(len(path) - 1):
         print(path[i] + " to " + path[i+1] + ", " + str(map.edges[path[i], path[i+1]]['weight']) + " km")    
-    
-        
-
 
 #main()
 #check to see if the right number of arguments is presented 

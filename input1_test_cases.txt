@@ -40,4 +40,4 @@ distance: 604 km
 route:
 Dresden to Leipzig, 119 km
 Leipzig to Nuremberg, 263 km
-Nuremberg to Frankfurt, 222 km
+Nuremberg to Frankfurt, 222 km1
